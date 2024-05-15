@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from './states/app.state';
+import { selectCount } from './states/counter/counter.selector';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +11,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngrxtest';
+  count$: Observable<number>;
+
+  constructor(private store: Store<AppState>){
+    this.count$ = this.store.select(selectCount)
+  }
 }
